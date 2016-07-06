@@ -1,0 +1,9 @@
+---
+- hosts: travis
+  connection: docker
+  remote_user: root
+  roles:
+    - {
+      role: ansible-role-jenkins,
+      jenkins_init_system: 'runit'
+    }

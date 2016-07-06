@@ -1,0 +1,72 @@
+---
+# tasks file for jenkins
+
+- name: Add jenkins apt key
+  apt_key:
+    url: 'http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key'
+    state: 'present'
+  tags:
+    - jenkins
+
+- name: Add jenkins repo
+  apt_repository:
+    repo: 'deb http://pkg.jenkins-ci.org/debian binary/'
+    state: 'present'
+    update_cache: 'yes'
+  tags:
+    - jenkins
+
+- name: Prevent jenkins to start on install
+  copy:
+    content: |-
+      #!/bin/sh
+      exit 101
+    dest: '/usr/sbin/policy-rc.d'
+    owner: 'root'
+    group: 'root'
+    mode: '0755'
+  changed_when: False
+  tags:
+    - jenkins
+
+- name: Install jenkins
+  apt:
+    name: 'jenkins'
+    state: 'present'
+  tags:
+    - jenkins
+
+- name: Remove policy-rc.d
+  file:
+    name: '/usr/sbin/policy-rc.d'
+    state: 'absent'
+  tags:
+    - jenkins
+
+- name: Ensure some dirs exist and belong to {{ jenkins_user }}
+  file:
+    dest: '{{ item }}'
+    state: 'directory'
+    owner: '{{ jenkins_user }}'
+    group: '{{ jenkins_group }}'
+    mode: '0775'
+  with_items:
+    - '{{ jenkins_log_dir }}'
+    - '{{ jenkins_cache_dir }}'
+  tags:
+    - jenkins
+
+- name: Configure jenkins
+  template:
+    src: 'default.j2'
+    dest: '{{ jenkins_conf_file }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: restart jenkins
+  tags:
+    - jenkins
+
+- include: '{{ jenkins_init_system }}.yml'
+  tags:
+    - jenkins

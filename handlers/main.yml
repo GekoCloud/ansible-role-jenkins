@@ -1,0 +1,30 @@
+---
+# handlers file for jenkins
+
+- name: restart jenkins
+  shell: >
+    /bin/true
+  notify: 'restart jenkins {{ jenkins_init_system }}'
+
+- name: restart jenkins upstart
+  service:
+    name: 'jenkins'
+    state: 'restarted'
+
+- name: restart jenkins runit
+  shell: >
+    sleep 5 && sv restart jenkins
+
+- name: reload jenkins
+  shell: >
+    /bin/true
+  notify: 'reload jenkins {{ jenkins_init_system }}'
+
+- name: reload jenkins upstart
+  service:
+    name: 'jenkins'
+    state: 'reloaded'
+
+- name: reload jenkins runit
+  shell: >
+    sleep 5 && sv reload jenkins

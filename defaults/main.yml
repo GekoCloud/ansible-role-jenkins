@@ -1,0 +1,8 @@
+---
+# defaults file for jenkins
+
+jenkins_init_system: 'upstart'
+jenkins_user: 'jenkins'
+jenkins_group: '{{ jenkins_user }}'
+jenkins_home: '/var/lib/jenkins'
+jenkins_http_port: '8080'
