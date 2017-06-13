@@ -1,9 +1,17 @@
 ---
-- hosts: travis
+- hosts: travis-trusty
+  connection: docker
+  remote_user: root
+  roles:
+    - {
+      role: ansible-role-jenkins
+    }
+
+- hosts: travis-xenial
   connection: docker
   remote_user: root
   roles:
     - {
       role: ansible-role-jenkins,
-      jenkins_init_system: 'runit'
+      jenkins_init_system: 'systemd'
     }

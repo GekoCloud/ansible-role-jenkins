@@ -11,6 +11,7 @@ Role Variables
 - `jenkins_home`: Jenkins' home dir (default: '/var/lib/jenkins')
 - `jenkins_init_system`: OS init system. Docker phusion/baseimage uses 'runit'. (default 'upstart')
 - `jenkins_http_port`: Port Jenkins will listen on (default: '8080')
+- `jenkins_state`: Desired daemon state after role execution (default: 'started')
 
 Dependencies
 ------------

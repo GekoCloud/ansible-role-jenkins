@@ -11,6 +11,11 @@
     name: 'jenkins'
     state: 'restarted'
 
+- name: restart jenkins systemd
+  service:
+    name: 'jenkins'
+    state: 'restarted'
+
 - name: restart jenkins runit
   shell: >
     sleep 5 && sv restart jenkins
@@ -21,6 +26,11 @@
   notify: 'reload jenkins {{ jenkins_init_system }}'
 
 - name: reload jenkins upstart
+  service:
+    name: 'jenkins'
+    state: 'reloaded'
+
+- name: reload jenkins systemd
   service:
     name: 'jenkins'
     state: 'reloaded'
