@@ -1,6 +1,16 @@
 ---
 # tasks file for jenkins
 
+- name: Install required packages
+  apt:
+    name: '{{ item }}'
+    state: 'installed'
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+  tags:
+    - jenkins
+
 - name: Add jenkins apt key
   apt_key:
     url: 'https://pkg.jenkins.io/debian/jenkins.io.key'
