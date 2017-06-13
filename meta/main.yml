@@ -16,8 +16,7 @@ galaxy_info:
     - jenkins
 
 dependencies:
-  - {
-    role: java,
-    src: 'https://github.com/dpujadas/ansible-role-java.git',
-    version: master
-  }
+- name: java
+  src: 'https://github.com/dpujadas/ansible-role-java.git'
+  scm: git
+  version: master
