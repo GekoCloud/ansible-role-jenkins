@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# Activate the Ubuntu Jenkins environment
-. {{ jenkins_conf_file }}
-
-exec 2>&1
-exec \
-setuser ${JENKINS_USER} ${JAVA} ${JAVA_ARGS} -jar ${JENKINS_WAR} ${JENKINS_ARGS}

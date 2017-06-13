@@ -1,8 +1,12 @@
 ---
 # vars file for jenkins
 
+jenkins_supported:
+  - xenial
+jenkins_init_system: 'systemd'
 jenkins_log_dir: '/var/log/jenkins'
 jenkins_cache_dir: '/var/cache/jenkins'
 jenkins_conf_file: '/etc/default/jenkins'
 
+# Jenkins requirement
 java_version: '8'

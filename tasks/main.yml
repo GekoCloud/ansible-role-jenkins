@@ -1,6 +1,13 @@
 ---
 # tasks file for jenkins
 
+- name: Check ubuntu version is supported
+  fail:
+    msg: 'Ubuntu {{ ansible_lsb.codename }} not supported'
+  when: ansible_lsb.codename not in jenkins_supported
+  tags:
+    - jenkins
+
 - name: Install required packages
   apt:
     name: '{{ item }}'

@@ -1,5 +1,0 @@
-- name: Ensure jenkins is {{ jenkins_state }} and enabled at boot
-  service:
-    name: 'jenkins'
-    state: '{{ jenkins_state }}'
-    enabled: 'yes'
