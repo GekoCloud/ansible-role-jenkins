@@ -4,3 +4,5 @@
 jenkins_log_dir: '/var/log/jenkins'
 jenkins_cache_dir: '/var/cache/jenkins'
 jenkins_conf_file: '/etc/default/jenkins'
+
+java_version: '8'
