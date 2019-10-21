@@ -3,6 +3,7 @@
 
 jenkins_supported:
   - xenial
+  - bionic
 jenkins_init_system: 'systemd'
 jenkins_log_dir: '/var/log/jenkins'
 jenkins_cache_dir: '/var/cache/jenkins'
